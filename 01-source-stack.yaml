@@ -22,5 +22,5 @@ Resources:
 
 Outputs:  #These values can be outputted to other stacks. 
   BucketName:
-    Value: !Ref Bucket
+    Value: !Ref SourceBucket
     Description: Name of the S3 bucket to which files will initially be uploaded before replication.
