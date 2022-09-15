@@ -1,0 +1,26 @@
+#Link to S3 documentation: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+
+AWSTemplateFormatVersion: "2010-09-09"
+#Description: Stack to deploy Destination S3 bucket.
+
+Resources:
+  DestinationBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties: 
+      BucketName: destination-bucket-brown-bag
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      Tags: 
+        - Key: "Function"
+          Value: "Destination"
+        - Key: "Location"  
+          Value: "eu-west-2"
+
+Outputs:  #These values can be outputted to other stacks. 
+  BucketName:
+    Value: !Ref DestinationBucket
+    Description: Name of the S3 bucket to which files will be replicated once the lambda is invoked.
