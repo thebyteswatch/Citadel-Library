@@ -4,7 +4,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 #Description: Stack to deploy Source & Destination S3 buckets.
 
 Resources:
-  Bucket: #Has to be alphanumeric.
+  SourceBucket: #Has to be alphanumeric.
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Delete
     Properties: 
