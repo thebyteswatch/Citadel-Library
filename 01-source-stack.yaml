@@ -1,0 +1,26 @@
+#Link to S3 documentation: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+
+AWSTemplateFormatVersion: "2010-09-09"
+#Description: Stack to deploy Source & Destination S3 buckets.
+
+Resources:
+  Bucket: #Has to be alphanumeric.
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Delete
+    Properties: 
+      BucketName: source-bucket-brown-bag #Can't contain uppercase characters + has to be globally unique.
+      AccessControl: PublicRead
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: #Objects uploaded to the s3 bucket are encrypted by default.
+              SSEAlgorithm: AES256
+      Tags: 
+        - Key: "Function"
+          Value: "Source"
+        - Key: "Location"  
+          Value: "eu-west-2"
+
+Outputs:  #These values can be outputted to other stacks. 
+  BucketName:
+    Value: !Ref Bucket
+    Description: Name of the S3 bucket to which files will initially be uploaded before replication.
